@@ -1,0 +1,5 @@
+package selice
+
+func selice() {
+
+}
