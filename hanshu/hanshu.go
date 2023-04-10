@@ -91,7 +91,7 @@ func Adder() func(int) int {
 }
 
 //闭包进阶1
-func adder2(x int) func(int) int {
+func Adder2(x int) func(int) int {
 	return func(y int) int {
 		x += y
 		return x

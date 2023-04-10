@@ -1,9 +1,6 @@
 package main
 
-import (
-	"fmt"
-	"study/hanshu"
-)
+import "study/hanshu"
 
 func main() {
 	//n := 4
@@ -37,7 +34,7 @@ func main() {
 	//}
 	//高阶函数
 	//作为参数
-	//fmt.Println(hanshu.AddPro(10, 20, hanshu.Add))
+	//fmt.Println(hanshu.AddPro(20, 20, hanshu.Add))
 	//作为返回值
 	//fmt.Println(hanshu.Switchpro("+"))
 
@@ -49,9 +46,15 @@ func main() {
 	//fmt.Println(f(10))
 	//fmt.Println(f(20))
 	//
+	//fmt.Println("Next f1")
 	//f1 := hanshu.Adder()
 	//fmt.Println(f1(30))
 	//fmt.Println(f1(40))
+	//闭包进阶1
+	f2 := hanshu.Adder2(10)
+	println(f2(5))
+	println(f2(4))
+	println(f2(7))
 	//闭包进阶2
 	//hz := hanshu.MakeSuffixFunc(".png")
 	//println(hz("1.png"))
@@ -67,11 +70,11 @@ func main() {
 	//照片类型-错误
 
 	//闭包进阶3
-	add1, sub1 := hanshu.Calc(10)
-	fmt.Println(add1(5))
-	fmt.Println(sub1(3))
-	fmt.Println(add1(4))
-	fmt.Println(sub1(2))
+	//add1, sub1 := hanshu.Calc(10)
+	//fmt.Println(add1(5))
+	//fmt.Println(sub1(3))
+	//fmt.Println(add1(4))
+	//fmt.Println(sub1(2))
 	//output
 	//15
 	//12
