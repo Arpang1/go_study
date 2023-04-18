@@ -1,6 +1,8 @@
 package main
 
-import "study/hanshu"
+import (
+	"study/neizhihanshu"
+)
 
 func main() {
 	//n := 4
@@ -51,10 +53,10 @@ func main() {
 	//fmt.Println(f1(30))
 	//fmt.Println(f1(40))
 	//闭包进阶1
-	f2 := hanshu.Adder2(10)
-	println(f2(5))
-	println(f2(4))
-	println(f2(7))
+	//f2 := hanshu.Adder2(10)
+	//println(f2(5))
+	//println(f2(4))
+	//println(f2(7))
 	//闭包进阶2
 	//hz := hanshu.MakeSuffixFunc(".png")
 	//println(hz("1.png"))
@@ -80,4 +82,8 @@ func main() {
 	//12
 	//16
 	//14
+
+	//内置函数
+	//defer
+	neizhihanshu.Defer()
 }
