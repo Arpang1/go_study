@@ -1,8 +1,6 @@
 package main
 
-import (
-	"study/neizhihanshu"
-)
+import "study/neizhihanshu"
 
 func main() {
 	//n := 4
@@ -85,5 +83,6 @@ func main() {
 
 	//内置函数
 	//defer
-	neizhihanshu.Defer()
+	//neizhihanshu.Defer()
+	neizhihanshu.Recover()
 }

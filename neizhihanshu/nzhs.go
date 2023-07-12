@@ -2,23 +2,33 @@ package neizhihanshu
 
 import (
 	"fmt"
-	"strconv"
 )
 
-//内置函数
-//defer语句：
+// 内置函数
+// defer语句：
 func Defer() {
-	fmt.Println(1)
-	fmt.Println(2)
-	c := 1 + 1 + 1 + 1 + 2
+	defer fmt.Println(1)
+	defer fmt.Println(2)
 	fmt.Println(3)
-	fmt.Println(4)
-	fmt.Println(5)
-	fmt.Println(6)
-	defer fmt.Println("c:" + strconv.Itoa(c))
-	a := []int{1, 2, 3, 4, 5, 6}
+	defer fmt.Println(4)
+}
 
-	c = 20
+// Panic语句
+func Panic() {
+	fmt.Println("A")
+	panic("B")
+	fmt.Println("C")
+}
 
-	defer fmt.Println(a)
+//recover语法
+
+func Recover() {
+	fmt.Println("A")
+	panic("B")
+	defer func() {
+		if err := recover(); err != nil {
+			fmt.Println(err)
+		}
+	}()
+	fmt.Println("C")
 }
