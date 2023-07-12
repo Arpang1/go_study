@@ -9,6 +9,9 @@ import (
 )
 
 func Hello(w http.ResponseWriter, r *http.Request) {
+	if r.Method == http.MethodGet {
+		fmt.Println("get method")
+	}
 	n := rand.Intn(2)
 	if n == 0 {
 		time.Sleep(time.Second * 3)
