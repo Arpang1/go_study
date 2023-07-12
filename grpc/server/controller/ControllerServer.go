@@ -3,6 +3,7 @@ package controller
 import (
 	"context"
 	"fmt"
+	"google.golang.org/grpc/metadata"
 	"log"
 	"server/pb/book"
 	"strconv"
@@ -55,6 +56,18 @@ func (s *GrpcServer) GetBooks(ctx context.Context, req *book.GetBooksRequest) (*
 func (s *GrpcServer) CreateBook(ctx context.Context, req *book.CreateBookRequest) (*book.CreateBookResponse, error) {
 	s.RLock()
 	defer s.RUnlock()
+	//拦截器--用来判断是否有权限访问
+	md, ok := metadata.FromIncomingContext(ctx)
+	if !ok {
+		return nil, fmt.Errorf("认证失败，丢失元数据")
+	}
+	if v, ok := md["ak"]; !ok || v[0] != "123456" {
+		return nil, fmt.Errorf("认证失败，AK错误")
+	}
+	if v, ok := md["sk"]; !ok || v[0] != "abcdef" {
+		return nil, fmt.Errorf("认证失败，SK错误")
+	}
+
 	log.Println("CreateBook Request: ", req)
 	id++
 	req.Book.Id = strconv.Itoa(id)
