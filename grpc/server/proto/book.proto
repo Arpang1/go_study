@@ -1,0 +1,45 @@
+syntax = "proto3";
+option go_package = "./pb/book";
+package book;
+
+message book {
+    string id = 1;
+    string name = 2;
+    string author = 3;
+    string price = 4;
+    string description = 6;
+}
+
+service BookService {
+    rpc GetBook (GetBookRequest) returns (GetBookResponse) {}
+    rpc GetBooks (GetBooksRequest) returns (GetBooksResponse) {}
+    rpc CreateBook (CreateBookRequest) returns (CreateBookResponse) {}
+}
+//获取图书请求
+message GetBookRequest {
+    string name = 1;
+}
+//获取图书响应
+message GetBookResponse {
+    book book = 1;
+}
+
+//获取图书列表请求
+message GetBooksRequest{
+
+}
+//获取图书列表相应
+message GetBooksResponse{
+  repeated book book = 1;
+}
+
+//创建书籍请求
+message CreateBookRequest{
+    book book = 1;
+}
+//创建书籍响应
+message CreateBookResponse{
+    string name = 1;
+}
+
+

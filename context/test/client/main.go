@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
+	"io"
 	"net"
 	"net/http"
 	"sync"
@@ -51,10 +52,15 @@ func doCall(ctx context.Context) {
 		req.WithContext(context.Background())
 		fmt.Println("timeout")
 	case resp := <-respChan:
-		fmt.Println(resp.err)
 		if resp.err != nil {
-			fmt.Println("Client Error:", resp.resp)
+			fmt.Println("Client Error:", resp.err)
 			return
+		} else {
+			b, err := io.ReadAll(resp.resp.Body)
+			if err != nil {
+				panic(err)
+			}
+			fmt.Println("Client :", string(b))
 		}
 		defer resp.resp.Body.Close()
 		fmt.Println("Server Code:", resp.resp.StatusCode)
@@ -62,7 +68,7 @@ func doCall(ctx context.Context) {
 }
 
 func main() {
-	ctx, cancel := context.WithTimeout(context.Background(), time.Second*2)
+	ctx, cancel := context.WithTimeout(context.Background(), time.Second*5)
 	defer cancel()
 	doCall(ctx)
 }
