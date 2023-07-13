@@ -13,8 +13,7 @@ type BookService struct {
 
 func NewBookService() *BookService {
 	l := localStorage{
-		Count: 0,
-		DB:    make(map[string]*book.Book),
+		DB: make(map[string]*book.Book),
 	}
 	Db = &l
 	return &BookService{}
@@ -24,7 +23,7 @@ func (s *BookService) CreateBook(ctx context.Context, req *book.CreateBookReques
 	Db.mux.Lock()
 	defer Db.mux.Unlock()
 	createbook := book.Book{
-		Id:          Db.GetId(),
+		Id:          req.Book.Id,
 		Name:        req.Book.Name,
 		Author:      req.Book.Author,
 		Description: req.Book.Description,
@@ -51,14 +50,8 @@ func (s *BookService) GetBook(ctx context.Context, req *book.GetBookRequest) (*b
 var Db *localStorage
 
 type localStorage struct {
-	Count int32
-	DB    map[string]*book.Book
-	mux   sync.Mutex
-}
-
-func (l *localStorage) GetId() int32 {
-	l.Count = l.Count + 1
-	return l.Count
+	DB  map[string]*book.Book
+	mux sync.Mutex
 }
 
 func (l *localStorage) Store(b *book.Book) error {

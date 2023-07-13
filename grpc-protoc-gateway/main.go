@@ -19,5 +19,4 @@ func main() {
 	if err != nil {
 		log.Printf("启动网关错误")
 	}
-
 }

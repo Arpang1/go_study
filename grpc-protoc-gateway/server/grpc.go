@@ -3,6 +3,7 @@ package server
 import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/grpclog"
+	"grpc-protoc-gateway/middleware"
 	"grpc-protoc-gateway/pb/book"
 	"io"
 	"net"
@@ -25,10 +26,12 @@ func GrpcRun() error {
 			return
 		}
 	}(l)
-
+	op := []grpc.ServerOption{
+		grpc.UnaryInterceptor(middleware.AuthInterceptor),
+	}
 	//创建grpac的server服务
 	// grpc.NewServer(opt ...ServerOption)  -->  opt为一些加密密钥
-	s := grpc.NewServer()
+	s := grpc.NewServer(op...)
 	//创捷一个book的Server
 	g := NewBookService()
 	//注册服务
