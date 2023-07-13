@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+//定义包的位置
+option  go_package = "./pb/book";
+
+//定义包名
+package book;
+
+//导入包
+import "google/api/annotations.proto";
+
+//定义一个book结构体
+message book {
+  int32 id = 1;
+  string name = 2;
+  string author = 3;
+  string description = 4;
+}
+
+service BookServer {
+  //创建书籍
+  rpc CreateBook (CreateBookRequest) returns (CreateBookResponse){
+    option (google.api.http) = {
+      post: "/v1/books"
+      body: "*"
+    };
+  }
+
+  //通过name获取书籍
+  rpc GetBook (GetBookRequest) returns (GetBookResponse){
+    option (google.api.http) = {
+      get: "/v1/book/{name}"
+    };
+  }
+}
+
+//创建书籍请求
+message CreateBookRequest {
+  book book = 1;
+}
+//创建书籍响应
+message CreateBookResponse{
+  string name = 1;
+}
+
+//获取书籍
+//请求
+message GetBookRequest{
+  string name = 1;
+}
+//响应
+message GetBookResponse{
+  book book = 1;
+}

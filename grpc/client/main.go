@@ -35,6 +35,7 @@ func main() {
 	options = append(options, grpc.WithTransportCredentials(insecure.NewCredentials()))
 
 	conn, err := grpc.Dial("127.0.0.1:31107", options...)
+	//conn, err := grpc.Dial("127.0.0.1:9080", grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		return
 	}
